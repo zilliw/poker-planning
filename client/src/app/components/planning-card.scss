@@ -19,6 +19,7 @@
     width: 70px;
     height: 100px;
     img { width: 50px; height: 50px; }
+    .illustration { width: 46px; height: 46px; font-size: 1.6rem; }
     .name { font-size: 0.6rem; }
     .big { font-size: 1.6rem; }
     .corner.bottom { display: none; }
@@ -42,12 +43,28 @@
     object-fit: contain;
   }
 
+  .illustration {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 2.1rem;
+    background: color-mix(in srgb, var(--accent) 45%, #fff);
+    border: 2px solid color-mix(in srgb, var(--primary) 35%, #fff);
+    margin-bottom: 4px;
+  }
+
   .name {
     font-size: 0.7rem;
     font-weight: 600;
     text-align: center;
     padding: 0 4px;
+    line-height: 1.1;
   }
+
+  // Keeps two-line names clear of the bottom corner.
+  &:not(.small) .name { margin-bottom: 10px; }
 
   .big {
     font-size: 2rem;
@@ -65,9 +82,35 @@
 
 .back {
   border: 3px solid #fff;
+  // Default back (and Pokémon): a Poké Ball.
   background:
     radial-gradient(circle at center, #fff 0 18%, #222 18% 22%, transparent 22%),
     linear-gradient(to bottom, var(--primary) 0 48%, #222 48% 52%, #fff 52%);
+
+  // One Piece: sea waves with a straw-hat yellow medallion.
+  &.back-onepiece {
+    background:
+      radial-gradient(circle at center, var(--accent) 0 22%, #3e2723 22% 25%, transparent 25%),
+      repeating-linear-gradient(160deg, var(--secondary) 0 10px, #24508f 10px 20px);
+  }
+
+  // Dragon Ball Z: an orange dragon ball on a blue aura.
+  &.back-dragonball {
+    background:
+      radial-gradient(circle at 42% 42%, #fff6 0 6%, transparent 7%),
+      radial-gradient(circle at center, #ffb74d 0 26%, var(--primary) 30%, #e65100 32%, transparent 33%),
+      radial-gradient(circle at center, #3b82f6, var(--secondary));
+  }
+
+  // Mario: a red mushroom cap with white spots.
+  &.back-mario {
+    background:
+      radial-gradient(circle at 25% 25%, #fff 0 11%, transparent 12%),
+      radial-gradient(circle at 78% 30%, #fff 0 9%, transparent 10%),
+      radial-gradient(circle at 70% 80%, #fff 0 12%, transparent 13%),
+      radial-gradient(circle at 20% 78%, #fff 0 8%, transparent 9%),
+      var(--primary);
+  }
 
   .back-logo {
     font-size: 1.2rem;
