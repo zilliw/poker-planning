@@ -1,0 +1,12 @@
+# Render Blueprint: New → Blueprint → select this repo.
+# Render injects PORT; the server listens on it and serves the SPA + WebSockets.
+services:
+  - type: web
+    name: poker-planning
+    runtime: docker
+    plan: free
+    region: frankfurt
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
