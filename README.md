@@ -5,7 +5,7 @@ Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 
 | Thème | Statut |
 |---|---|
 | ⚡ Pokémon | ✅ disponible (illustrations officielles) |
-| 🏴‍☠️ One Piece | ✅ disponible (illustrations emoji) |
+| 🏴‍☠️ One Piece | ✅ disponible (portraits des avis de recherche) |
 | 🐉 Dragon Ball Z | ✅ disponible (illustrations emoji) |
 | 🍄 Mario | ✅ disponible (illustrations emoji) |
 | ⚽ Footballeurs | 🔜 bientôt |

@@ -19,7 +19,13 @@ import { ThemeDefinition, cardImage } from '../core/themes';
         <span class="corner top">{{ value() }}</span>
         @if (art(); as a) {
           @if (image(); as src) {
-            <img [src]="src" [alt]="a.name" loading="lazy" (error)="brokenImage.set(src)" />
+            <img
+              [src]="src"
+              [alt]="a.name"
+              [class.portrait]="theme().bundledImages"
+              loading="lazy"
+              (error)="brokenImage.set(src)"
+            />
           } @else {
             <span class="illustration" aria-hidden="true">{{ a.emoji }}</span>
           }
