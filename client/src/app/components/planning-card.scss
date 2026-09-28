@@ -1,0 +1,92 @@
+:host {
+  display: inline-block;
+}
+
+.card {
+  position: relative;
+  width: 92px;
+  height: 132px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 15%);
+  user-select: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &.small {
+    width: 70px;
+    height: 100px;
+    img { width: 50px; height: 50px; }
+    .name { font-size: 0.6rem; }
+    .big { font-size: 1.6rem; }
+    .corner.bottom { display: none; }
+  }
+}
+
+.front {
+  background: #fff;
+  border: 3px solid var(--primary);
+  color: var(--secondary);
+
+  &.selected {
+    transform: translateY(-14px);
+    border-color: var(--accent-strong, var(--secondary));
+    box-shadow: 0 10px 20px rgb(0 0 0 / 25%);
+  }
+
+  img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+
+  .name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0 4px;
+  }
+
+  .big {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  .corner {
+    position: absolute;
+    font-weight: 800;
+    font-size: 0.95rem;
+    &.top { top: 4px; left: 7px; }
+    &.bottom { bottom: 4px; right: 7px; transform: rotate(180deg); }
+  }
+}
+
+.back {
+  border: 3px solid #fff;
+  background:
+    radial-gradient(circle at center, #fff 0 18%, #222 18% 22%, transparent 22%),
+    linear-gradient(to bottom, var(--primary) 0 48%, #222 48% 52%, #fff 52%);
+
+  .back-logo {
+    font-size: 1.2rem;
+    z-index: 1;
+  }
+
+  .check {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #2e7d32;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 25%);
+  }
+}

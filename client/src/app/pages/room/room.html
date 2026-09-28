@@ -1,0 +1,117 @@
+<div
+  class="room"
+  [style.--primary]="palette().primary"
+  [style.--secondary]="palette().secondary"
+  [style.--accent]="palette().accent"
+  [style.--bg]="palette().background"
+>
+  <header class="topbar">
+    <a routerLink="/" class="brand">🃏 Poker Planning</a>
+    <div class="room-info">
+      <span class="code">Room <strong>{{ id() }}</strong></span>
+      <button type="button" class="ghost" (click)="copyLink()">
+        {{ copied() ? 'Lien copié ✔' : 'Copier le lien' }}
+      </button>
+    </div>
+    <label class="theme-select">
+      <span>Thème</span>
+      <select [ngModel]="theme().id" (ngModelChange)="changeTheme($event)" [disabled]="!state()">
+        @for (t of themes; track t.id) {
+          <option [value]="t.id" [disabled]="!t.available">
+            {{ t.emoji }} {{ t.label }}{{ t.available ? '' : ' (bientôt)' }}
+          </option>
+        }
+      </select>
+    </label>
+    <span class="status" [class.online]="planning.connected()">
+      {{ planning.connected() ? 'Connecté' : 'Déconnecté' }}
+    </span>
+  </header>
+
+  @if (planning.error(); as error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (needsName()) {
+    <form class="name-form" (ngSubmit)="submitName()">
+      <h2>Rejoindre la room {{ id() }}</h2>
+      <input
+        type="text"
+        name="name"
+        maxlength="30"
+        placeholder="Votre nom"
+        autofocus
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+      />
+      <button class="primary" type="submit" [disabled]="!name().trim()">Rejoindre</button>
+    </form>
+  } @else if (state(); as s) {
+    <section class="table">
+      <div class="participants">
+        @for (p of s.participants; track p.id) {
+          <div class="seat" [class.me]="p.id === planning.clientId">
+            @if (s.revealed && p.vote) {
+              <app-planning-card [value]="p.vote" [theme]="theme()" [small]="true" />
+            } @else if (p.hasVoted) {
+              <app-planning-card [faceDown]="true" [checked]="true" [theme]="theme()" [small]="true" />
+            } @else {
+              <div class="empty-slot">{{ s.revealed ? '—' : '…' }}</div>
+            }
+            <span class="player">{{ p.name }}{{ p.id === planning.clientId ? ' (moi)' : '' }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="center">
+        <p class="progress">{{ planning.votedCount() }} / {{ s.participants.length }} ont voté</p>
+        <div class="actions">
+          <button
+            type="button"
+            class="primary"
+            [disabled]="s.revealed || planning.votedCount() === 0"
+            (click)="planning.reveal()"
+          >
+            Révéler les votes
+          </button>
+          <button type="button" class="secondary" (click)="planning.clear()">Clean</button>
+        </div>
+
+        @if (stats(); as st) {
+          <div class="stats">
+            @if (st.consensus) {
+              <p class="consensus">🎉 Consensus !</p>
+            }
+            @if (st.average !== null) {
+              <p>Moyenne : <strong>{{ st.average }}</strong> · Suggestion : <strong>{{ st.suggestion }}</strong></p>
+            }
+            <div class="distribution">
+              @for (d of st.distribution; track d.value) {
+                <span class="chip">{{ d.value }} × {{ d.count }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="hand" [class.locked]="s.revealed">
+      <h3>{{ s.revealed ? 'Votes révélés — cliquez sur Clean pour un nouveau tour' : 'Choisissez votre carte' }}</h3>
+      <div class="cards">
+        @for (c of cards; track c) {
+          <button
+            type="button"
+            class="card-btn"
+            [disabled]="s.revealed"
+            [attr.aria-pressed]="s.myVote === c"
+            (click)="pick(c)"
+          >
+            <app-planning-card [value]="c" [theme]="theme()" [selected]="s.myVote === c" />
+          </button>
+        }
+      </div>
+    </section>
+  } @else {
+    <p class="loading">Connexion à la room…</p>
+  }
+</div>

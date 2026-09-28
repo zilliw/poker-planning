@@ -1,0 +1,32 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: #f4f6fb;
+  color: #222;
+  --primary: #ef5350;
+  --secondary: #3b4cca;
+}
+
+input, select, button { font: inherit; }
+
+input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: #e0e0e0;
+
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  &.primary { background: var(--primary); color: #fff; }
+  &.secondary { background: var(--secondary); color: #fff; }
+}

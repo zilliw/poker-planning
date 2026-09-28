@@ -1,0 +1,59 @@
+<main class="home">
+  <header>
+    <h1>🃏 Poker Planning</h1>
+    <p>Estimez vos stories avec la suite de Fibonacci, en équipe et en temps réel.</p>
+  </header>
+
+  <section class="panel">
+    <label class="field">
+      <span>Votre nom</span>
+      <input
+        type="text"
+        maxlength="30"
+        placeholder="Ex. Sacha"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+      />
+    </label>
+
+    <div class="field">
+      <span>Thème</span>
+      <div class="themes">
+        @for (t of themes; track t.id) {
+          <button
+            type="button"
+            class="theme"
+            [class.active]="theme() === t.id"
+            [disabled]="!t.available"
+            [style.--primary]="t.palette.primary"
+            (click)="theme.set(t.id)"
+          >
+            <span class="emoji">{{ t.emoji }}</span>
+            <span>{{ t.label }}</span>
+            @if (!t.available) {
+              <small>Bientôt</small>
+            }
+          </button>
+        }
+      </div>
+    </div>
+
+    <button class="primary" type="button" [disabled]="!name().trim()" (click)="create()">
+      Créer une room
+    </button>
+  </section>
+
+  <section class="panel">
+    <h2>Rejoindre une room</h2>
+    <form class="join" (ngSubmit)="joinExisting()">
+      <input
+        type="text"
+        name="code"
+        placeholder="Code ou lien de la room"
+        [ngModel]="roomCode()"
+        (ngModelChange)="roomCode.set($event)"
+      />
+      <button type="submit" [disabled]="!name().trim() || !roomCode().trim()">Rejoindre</button>
+    </form>
+  </section>
+</main>
