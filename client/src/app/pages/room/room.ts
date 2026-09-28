@@ -6,8 +6,6 @@ import { PlanningService } from '../../core/planning.service';
 import { THEMES, themeById } from '../../core/themes';
 import { PlanningCard } from '../../components/planning-card';
 
-const NUMERIC_VALUES = CARD_VALUES.filter((v) => !isNaN(Number(v))).map(Number);
-
 @Component({
   selector: 'app-room',
   imports: [FormsModule, RouterLink, PlanningCard],
@@ -35,21 +33,12 @@ export class Room implements OnInit, OnDestroy {
     const s = this.state();
     if (!s?.revealed) return null;
     const votes = s.participants.map((p) => p.vote).filter((v): v is CardValue => v !== null);
-    const numbers = votes.map(Number).filter((n) => !isNaN(n));
-    const average = numbers.length ? numbers.reduce((a, b) => a + b, 0) / numbers.length : null;
-    // Closest Fibonacci value, rounding up on ties (5 vs 8 for 6.5 → 8).
-    const suggestion =
-      average === null
-        ? null
-        : NUMERIC_VALUES.reduce((best, v) => (Math.abs(v - average) <= Math.abs(best - average) ? v : best));
     const counts = new Map<CardValue, number>();
     for (const v of votes) counts.set(v, (counts.get(v) ?? 0) + 1);
     const distribution = [...counts.entries()]
       .map(([value, count]) => ({ value, count }))
       .sort((a, b) => b.count - a.count);
     return {
-      average: average === null ? null : Math.round(average * 10) / 10,
-      suggestion,
       consensus: votes.length > 1 && counts.size === 1,
       distribution,
     };

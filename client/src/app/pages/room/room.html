@@ -82,9 +82,6 @@
             @if (st.consensus) {
               <p class="consensus">🎉 Consensus !</p>
             }
-            @if (st.average !== null) {
-              <p>Moyenne : <strong>{{ st.average }}</strong> · Suggestion : <strong>{{ st.suggestion }}</strong></p>
-            }
             <div class="distribution">
               @for (d of st.distribution; track d.value) {
                 <span class="chip">{{ d.value }} × {{ d.count }}</span>
