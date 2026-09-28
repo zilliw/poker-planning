@@ -1,6 +1,6 @@
 # 🃏 Poker Planning
 
-Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 13 21 34 55 89 ? ☕`), avec des **thèmes** pour personnaliser les cartes.
+Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 13 21 ? ☕`), avec des **thèmes** pour personnaliser les cartes.
 
 | Thème | Statut |
 |---|---|
@@ -13,7 +13,7 @@ Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 
 
 - Création d'une room et partage par lien (`/room/<code>`), jusqu'à 20 participants.
 - Chacun vote depuis son navigateur **sans voir les votes des autres** : on voit seulement qui a voté (carte retournée avec une icône ✔).
-- **Révéler les votes** : affiche toutes les cartes à tous les participants, avec la moyenne, la valeur Fibonacci suggérée, la répartition et un indicateur de consensus.
+- **Révéler les votes** : affiche toutes les cartes à tous les participants, avec la répartition des votes et un indicateur de consensus.
 - **Clean** : remet la table à zéro pour un nouveau tour.
 - Changement de thème à la volée, synchronisé pour toute la room.
 - Un rechargement de page conserve le participant et son vote (reconnexion automatique).
