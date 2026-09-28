@@ -38,9 +38,13 @@ export class Room implements OnInit, OnDestroy {
     const distribution = [...counts.entries()]
       .map(([value, count]) => ({ value, count }))
       .sort((a, b) => b.count - a.count);
+    // Most voted estimate; on a tie the highest card wins (? and ☕ lose every tie).
+    const rank = (v: CardValue) => (isNaN(Number(v)) ? -1 : Number(v));
+    const top = [...counts.entries()].sort(([va, ca], [vb, cb]) => cb - ca || rank(vb) - rank(va))[0];
     return {
       consensus: votes.length > 1 && counts.size === 1,
       distribution,
+      topVote: top ? { value: top[0], count: top[1] } : null,
     };
   });
 

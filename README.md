@@ -14,6 +14,8 @@ Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 
 - Création d'une room et partage par lien (`/room/<code>`), jusqu'à 20 participants.
 - Chacun vote depuis son navigateur **sans voir les votes des autres** : on voit seulement qui a voté (carte retournée avec une icône ✔).
 - **Révéler les votes** : affiche toutes les cartes à tous les participants, avec la répartition des votes et un indicateur de consensus.
+- À gauche, **Votre estimation** : la carte que vous avez choisie.
+- À droite, **Estimation la plus votée** (après révélation) : en cas d'égalité, la valeur la plus élevée l'emporte.
 - **Clean** : remet la table à zéro pour un nouveau tour.
 - Changement de thème à la volée, synchronisé pour toute la room.
 - Un rechargement de page conserve le participant et son vote (reconnexion automatique).
