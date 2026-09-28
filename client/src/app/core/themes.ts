@@ -14,7 +14,10 @@ export interface ThemeDefinition {
   label: string;
   emoji: string;
   available: boolean;
-  /** True once `client/public/themes/<id>/<slug>.webp` images exist for every card. */
+  /**
+   * True once a face-cropped portrait `client/public/themes/<id>/<slug>.webp` exists for every card;
+   * portraits are shown in a round medallion.
+   */
   bundledImages?: boolean;
   /** CSS custom properties applied to the room. */
   palette: { primary: string; secondary: string; accent: string; background: string };
@@ -61,16 +64,17 @@ const ONE_PIECE: ThemeDefinition = {
   label: 'One Piece',
   emoji: '🏴‍☠️',
   available: true,
+  bundledImages: true,
   palette: { primary: '#c62828', secondary: '#1a3a6b', accent: '#f4c542', background: '#fbf3e0' },
   cards: {
-    '0': { name: 'Coby', emoji: '🎖️' },
-    '1': { name: 'Usopp', emoji: '🎯' },
-    '2': { name: 'Nami', emoji: '🍊' },
-    '3': { name: 'Chopper', emoji: '🦌' },
+    '0': { name: 'Usopp', emoji: '🎯' },
+    '1': { name: 'Chopper', emoji: '🦌' },
+    '2': { name: 'Baggy', emoji: '🤡' },
+    '3': { name: 'Nami', emoji: '🍊' },
     '5': { name: 'Sanji', emoji: '🍳' },
     '8': { name: 'Zoro', emoji: '⚔️' },
     '13': { name: 'Luffy', emoji: '👒' },
-    '21': { name: 'Barbe Blanche', emoji: '🌊' },
+    '21': { name: 'Gol D. Roger', emoji: '☠️' },
     '?': { name: 'Nico Robin', emoji: '📚' },
     '☕': { name: 'Brook', emoji: '🎻' },
   },
