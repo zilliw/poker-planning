@@ -8,7 +8,9 @@
   <header class="topbar">
     <a routerLink="/" class="brand">🃏 Poker Planning</a>
     <div class="room-info">
-      <span class="code">Room <strong>{{ id() }}</strong></span>
+      <span class="code"
+        >Room <strong>{{ id() }}</strong></span
+      >
       <button type="button" class="ghost" (click)="copyLink()">
         {{ copied() ? 'Lien copié ✔' : 'Copier le lien' }}
       </button>
@@ -47,53 +49,89 @@
       <button class="primary" type="submit" [disabled]="!name().trim()">Rejoindre</button>
     </form>
   } @else if (state(); as s) {
-    <section class="table">
-      <div class="participants">
-        @for (p of s.participants; track p.id) {
-          <div class="seat" [class.me]="p.id === planning.clientId">
-            @if (s.revealed && p.vote) {
-              <app-planning-card [value]="p.vote" [theme]="theme()" [small]="true" />
-            } @else if (p.hasVoted) {
-              <app-planning-card [faceDown]="true" [checked]="true" [theme]="theme()" [small]="true" />
-            } @else {
-              <div class="empty-slot">{{ s.revealed ? '—' : '…' }}</div>
-            }
-            <span class="player">{{ p.name }}{{ p.id === planning.clientId ? ' (moi)' : '' }}</span>
-          </div>
+    <div class="board">
+      <aside class="panel mine">
+        <h2>Votre estimation</h2>
+        @if (s.myVote) {
+          <app-planning-card [value]="s.myVote" [theme]="theme()" />
+        } @else {
+          <div class="placeholder">Choisissez une carte</div>
         }
-      </div>
+      </aside>
 
-      <div class="center">
-        <p class="progress">{{ planning.votedCount() }} / {{ s.participants.length }} ont voté</p>
-        <div class="actions">
-          <button
-            type="button"
-            class="primary"
-            [disabled]="s.revealed || planning.votedCount() === 0"
-            (click)="planning.reveal()"
-          >
-            Révéler les votes
-          </button>
-          <button type="button" class="secondary" (click)="planning.clear()">Clean</button>
+      <section class="table">
+        <div class="participants">
+          @for (p of s.participants; track p.id) {
+            <div class="seat" [class.me]="p.id === planning.clientId">
+              @if (s.revealed && p.vote) {
+                <app-planning-card [value]="p.vote" [theme]="theme()" [small]="true" />
+              } @else if (p.hasVoted) {
+                <app-planning-card
+                  [faceDown]="true"
+                  [checked]="true"
+                  [theme]="theme()"
+                  [small]="true"
+                />
+              } @else {
+                <div class="empty-slot">{{ s.revealed ? '—' : '…' }}</div>
+              }
+              <span class="player"
+                >{{ p.name }}{{ p.id === planning.clientId ? ' (moi)' : '' }}</span
+              >
+            </div>
+          }
         </div>
 
-        @if (stats(); as st) {
-          <div class="stats">
-            @if (st.consensus) {
-              <p class="consensus">🎉 Consensus !</p>
-            }
-            <div class="distribution">
-              @for (d of st.distribution; track d.value) {
-                <span class="chip">{{ d.value }} × {{ d.count }}</span>
+        <div class="center">
+          <p class="progress">{{ planning.votedCount() }} / {{ s.participants.length }} ont voté</p>
+          <div class="actions">
+            <button
+              type="button"
+              class="primary"
+              [disabled]="s.revealed || planning.votedCount() === 0"
+              (click)="planning.reveal()"
+            >
+              Révéler les votes
+            </button>
+            <button type="button" class="secondary" (click)="planning.clear()">Clean</button>
+          </div>
+
+          @if (stats(); as st) {
+            <div class="stats">
+              @if (st.consensus) {
+                <p class="consensus">🎉 Consensus !</p>
               }
+              <div class="distribution">
+                @for (d of st.distribution; track d.value) {
+                  <span class="chip">{{ d.value }} × {{ d.count }}</span>
+                }
+              </div>
             </div>
+          }
+        </div>
+      </section>
+
+      <aside class="panel top">
+        <h2>Estimation la plus votée</h2>
+        @if (stats()?.topVote; as top) {
+          <app-planning-card [value]="top.value" [theme]="theme()" />
+          <p class="votes-count">{{ top.count }} vote{{ top.count > 1 ? 's' : '' }}</p>
+        } @else {
+          <div class="placeholder">
+            {{ s.revealed ? 'Aucun vote' : 'Révélez les votes pour voir le résultat' }}
           </div>
         }
-      </div>
-    </section>
+      </aside>
+    </div>
 
     <section class="hand" [class.locked]="s.revealed">
-      <h3>{{ s.revealed ? 'Votes révélés — cliquez sur Clean pour un nouveau tour' : 'Choisissez votre carte' }}</h3>
+      <h3>
+        {{
+          s.revealed
+            ? 'Votes révélés — cliquez sur Clean pour un nouveau tour'
+            : 'Choisissez votre carte'
+        }}
+      </h3>
       <div class="cards">
         @for (c of cards; track c) {
           <button
