@@ -4,10 +4,11 @@ Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 
 
 | Thème | Statut |
 |---|---|
-| ⚡ Pokémon | ✅ disponible |
-| 🏴‍☠️ One Piece | 🔜 bientôt |
+| ⚡ Pokémon | ✅ disponible (illustrations officielles) |
+| 🏴‍☠️ One Piece | ✅ disponible (illustrations emoji) |
+| 🐉 Dragon Ball Z | ✅ disponible (illustrations emoji) |
+| 🍄 Mario | ✅ disponible (illustrations emoji) |
 | ⚽ Footballeurs | 🔜 bientôt |
-| 🍄 Mario | 🔜 bientôt |
 
 ## Fonctionnalités
 
@@ -65,8 +66,15 @@ npm run install:all && npm run build && npm start
 | `DISCONNECT_GRACE_MS` | `15000` | Délai avant de retirer un participant déconnecté |
 | `CORS_ORIGIN` | – | Origines autorisées si le front est hébergé ailleurs (séparées par des virgules) |
 
-## Ajouter un thème
+## Ajouter un thème ou des images
 
-Les thèmes sont définis dans `client/src/app/core/themes.ts` : une palette de couleurs et une image + un nom de personnage par valeur de carte. Placez les images dans `client/public/themes/<theme>/` et passez `available: true`.
+Les thèmes sont définis dans `client/src/app/core/themes.ts` : une palette de couleurs et, pour chaque valeur de carte, un personnage (nom + emoji). Plus l'estimation est grande, plus le personnage est puissant. Le dos des cartes se personnalise dans `client/src/app/components/planning-card.scss` (`.back-<thème>`).
+
+Pour remplacer les emoji par de vraies images (One Piece, Dragon Ball Z, Mario) :
+
+1. Déposez une image par carte dans `client/public/themes/<thème>/`, nommée d'après la valeur : `0.webp`, `1.webp`, `2.webp`, `3.webp`, `5.webp`, `8.webp`, `13.webp`, `21.webp`, `question.webp` (?) et `coffee.webp` (☕). Un format carré d'environ 200 × 200 px suffit.
+2. Ajoutez `bundledImages: true` au thème dans `themes.ts`.
+
+Si une image manque ou ne se charge pas, la carte affiche automatiquement l'emoji.
 
 Les illustrations Pokémon proviennent de [PokeAPI/sprites](https://github.com/PokeAPI/sprites). Pokémon est une marque de Nintendo / Game Freak / The Pokémon Company.
