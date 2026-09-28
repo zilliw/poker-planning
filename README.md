@@ -40,7 +40,17 @@ npm test             # tests unitaires du serveur
 
 ## Déploiement
 
-### Docker (recommandé)
+### Render (recommandé)
+
+Le fichier `render.yaml` décrit le service :
+
+1. Sur [render.com](https://dashboard.render.com), cliquez sur **New → Blueprint**.
+2. Choisissez le repo `zilliw/poker-planning`, puis **Apply**.
+3. L'URL publique (`https://poker-planning-xxxx.onrender.com`) s'affiche une fois le build terminé. Chaque fusion sur `main` redéploie l'application.
+
+Offre gratuite : mise en veille après 15 min d'inactivité, environ 30 s de réveil, et les rooms en cours sont perdues.
+
+### Docker
 
 ```bash
 docker build -t poker-planning .
