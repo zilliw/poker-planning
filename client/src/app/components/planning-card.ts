@@ -15,26 +15,27 @@ import { ThemeDefinition, cardImage } from '../core/themes';
         }
       </div>
     } @else {
-      <div class="card front" [class.small]="small()" [class.selected]="selected()">
-        <span class="corner top">{{ value() }}</span>
-        @if (art(); as a) {
-          @if (image(); as src) {
-            <img
-              [src]="src"
-              [alt]="a.name"
-              [class.portrait]="theme().bundledImages"
-              loading="lazy"
-              (error)="brokenImage.set(src)"
-            />
-          } @else {
-            <span class="illustration" aria-hidden="true">{{ a.emoji }}</span>
-          }
-          <span class="name">{{ a.name }}</span>
+      @if (art(); as a) {
+        @if (image(); as src) {
+          <!-- Full-bleed art: the value badge and name banner sit on top of the image. -->
+          <div class="card front full" [class.small]="small()" [class.selected]="selected()">
+            <img class="art" [src]="src" [alt]="a.name" loading="lazy" (error)="brokenImage.set(src)" />
+            <span class="badge">{{ value() }}</span>
+            <span class="banner">{{ a.name }}</span>
+          </div>
         } @else {
-          <span class="big">{{ value() }}</span>
+          <div class="card front" [class.small]="small()" [class.selected]="selected()">
+            <span class="corner top">{{ value() }}</span>
+            <span class="illustration" aria-hidden="true">{{ a.emoji }}</span>
+            <span class="name">{{ a.name }}</span>
+            <span class="corner bottom">{{ value() }}</span>
+          </div>
         }
-        <span class="corner bottom">{{ value() }}</span>
-      </div>
+      } @else {
+        <div class="card front" [class.small]="small()" [class.selected]="selected()">
+          <span class="big">{{ value() }}</span>
+        </div>
+      }
     }
   `,
   styleUrl: './planning-card.scss',

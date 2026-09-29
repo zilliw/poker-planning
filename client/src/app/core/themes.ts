@@ -14,10 +14,7 @@ export interface ThemeDefinition {
   label: string;
   emoji: string;
   available: boolean;
-  /**
-   * True once a face-cropped portrait `client/public/themes/<id>/<slug>.webp` exists for every card;
-   * portraits are shown in a round medallion.
-   */
+  /** True once an image `client/public/themes/<id>/<slug>.webp` (280×400, card ratio) exists for every card. */
   bundledImages?: boolean;
   /** CSS custom properties applied to the room. */
   palette: { primary: string; secondary: string; accent: string; background: string };
