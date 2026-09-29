@@ -5,9 +5,10 @@ Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 
 | Thème | Statut |
 |---|---|
 | ⚡ Pokémon | ✅ disponible (illustrations officielles) |
-| 🏴‍☠️ One Piece | ✅ disponible (portraits des avis de recherche) |
-| 🐉 Dragon Ball Z | ✅ disponible (illustrations emoji) |
-| 🍄 Mario | ✅ disponible (illustrations emoji) |
+| 🏴‍☠️ One Piece | ✅ disponible (avis de recherche) |
+| 🐉 Dragon Ball Z | ✅ disponible |
+| 🍄 Mario | ✅ disponible |
+| 🎤 KPop Demon Hunters | ✅ disponible |
 | ⚽ Footballeurs | 🔜 bientôt |
 
 ## Fonctionnalités
@@ -80,7 +81,7 @@ npm run install:all && npm run build && npm start
 
 Les thèmes sont définis dans `client/src/app/core/themes.ts` : une palette de couleurs et, pour chaque valeur de carte, un personnage (nom + emoji). Plus l'estimation est grande, plus le personnage est puissant. Le dos des cartes se personnalise dans `client/src/app/components/planning-card.scss` (`.back-<thème>`).
 
-Pour remplacer les emoji par de vraies images (One Piece, Dragon Ball Z, Mario) :
+Pour remplacer les emoji par de vraies images dans un nouveau thème :
 
 1. Déposez une image par carte dans `client/public/themes/<thème>/`, nommée d'après la valeur : `0.webp`, `1.webp`, `2.webp`, `3.webp`, `5.webp`, `8.webp`, `13.webp`, `21.webp`, `question.webp` (?) et `coffee.webp` (☕). Format portrait 280 × 400 px (proportions de la carte) : l'image occupe toute la carte, la valeur s'affiche dans une pastille en haut à gauche.
 2. Ajoutez `bundledImages: true` au thème dans `themes.ts`.

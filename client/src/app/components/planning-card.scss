@@ -150,6 +150,14 @@
       radial-gradient(circle at center, #3b82f6, var(--secondary));
   }
 
+  // KPop Demon Hunters: the golden Honmoon barrier over a violet night.
+  &.back-kpop {
+    background:
+      radial-gradient(circle at center, var(--accent) 0 12%, transparent 13%),
+      repeating-radial-gradient(circle at center, transparent 0 9px, rgb(250 204 21 / 55%) 9px 11px),
+      linear-gradient(160deg, var(--primary), var(--secondary));
+  }
+
   // Mario: a red mushroom cap with white spots.
   &.back-mario {
     background:
