@@ -82,7 +82,7 @@ Les thèmes sont définis dans `client/src/app/core/themes.ts` : une palette de 
 
 Pour remplacer les emoji par de vraies images (One Piece, Dragon Ball Z, Mario) :
 
-1. Déposez une image par carte dans `client/public/themes/<thème>/`, nommée d'après la valeur : `0.webp`, `1.webp`, `2.webp`, `3.webp`, `5.webp`, `8.webp`, `13.webp`, `21.webp`, `question.webp` (?) et `coffee.webp` (☕). Un format carré d'environ 200 × 200 px suffit.
+1. Déposez une image par carte dans `client/public/themes/<thème>/`, nommée d'après la valeur : `0.webp`, `1.webp`, `2.webp`, `3.webp`, `5.webp`, `8.webp`, `13.webp`, `21.webp`, `question.webp` (?) et `coffee.webp` (☕). Format portrait 280 × 400 px (proportions de la carte) : l'image occupe toute la carte, la valeur s'affiche dans une pastille en haut à gauche.
 2. Ajoutez `bundledImages: true` au thème dans `themes.ts`.
 
 Si une image manque ou ne se charge pas, la carte affiche automatiquement l'emoji.
