@@ -82,16 +82,17 @@ const DRAGON_BALL: ThemeDefinition = {
   label: 'Dragon Ball Z',
   emoji: '🐉',
   available: true,
+  bundledImages: true,
   palette: { primary: '#f57c00', secondary: '#1e3a8a', accent: '#fde047', background: '#fff7ed' },
   cards: {
-    '0': { name: 'Yamcha', emoji: '🐺' },
-    '1': { name: 'Chaozu', emoji: '🎎' },
+    '0': { name: 'Mr. Satan', emoji: '🏆' },
+    '1': { name: 'Yamcha', emoji: '🐺' },
     '2': { name: 'Krilin', emoji: '💿' },
-    '3': { name: 'Tenshinhan', emoji: '👁️' },
-    '5': { name: 'Piccolo', emoji: '🟢' },
-    '8': { name: 'Gohan', emoji: '📘' },
-    '13': { name: 'Vegeta', emoji: '👑' },
-    '21': { name: 'Goku', emoji: '⚡' },
+    '3': { name: 'Piccolo', emoji: '🟢' },
+    '5': { name: 'Sangohan', emoji: '📘' },
+    '8': { name: 'Vegeta', emoji: '👑' },
+    '13': { name: 'Sangoku', emoji: '⚡' },
+    '21': { name: 'Vegeto', emoji: '💥' },
     '?': { name: 'Majin Buu', emoji: '🍬' },
     '☕': { name: 'Tortue Géniale', emoji: '🐢' },
   },
@@ -102,6 +103,7 @@ const MARIO: ThemeDefinition = {
   label: 'Mario',
   emoji: '🍄',
   available: true,
+  bundledImages: true,
   palette: { primary: '#e52521', secondary: '#049cd8', accent: '#fbd000', background: '#eef8ff' },
   cards: {
     '0': { name: 'Goomba', emoji: '🌰' },
@@ -117,6 +119,27 @@ const MARIO: ThemeDefinition = {
   },
 };
 
+const KPOP: ThemeDefinition = {
+  id: 'kpop',
+  label: 'KPop Demon Hunters',
+  emoji: '🎤',
+  available: true,
+  bundledImages: true,
+  palette: { primary: '#c026d3', secondary: '#4c1d95', accent: '#facc15', background: '#faf5ff' },
+  cards: {
+    '0': { name: 'Sussie', emoji: '🐦' },
+    '1': { name: 'Bobby', emoji: '📋' },
+    '2': { name: 'Baby Saja', emoji: '🍼' },
+    '3': { name: 'Abby Saja', emoji: '💪' },
+    '5': { name: 'Zoey', emoji: '✍️' },
+    '8': { name: 'Mira', emoji: '💃' },
+    '13': { name: 'Jinu', emoji: '😈' },
+    '21': { name: 'Rumi', emoji: '🌟' },
+    '?': { name: 'Mystery Saja', emoji: '🎭' },
+    '☕': { name: 'Derpy', emoji: '🐯' },
+  },
+};
+
 const FOOTBALL: ThemeDefinition = {
   id: 'football',
   label: 'Footballeurs',
@@ -126,6 +149,6 @@ const FOOTBALL: ThemeDefinition = {
   cards: {},
 };
 
-export const THEMES: ThemeDefinition[] = [POKEMON, ONE_PIECE, DRAGON_BALL, MARIO, FOOTBALL];
+export const THEMES: ThemeDefinition[] = [POKEMON, ONE_PIECE, DRAGON_BALL, MARIO, KPOP, FOOTBALL];
 
 export const themeById = (id: ThemeId): ThemeDefinition => THEMES.find((t) => t.id === id) ?? POKEMON;
