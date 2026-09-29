@@ -140,15 +140,6 @@ const KPOP: ThemeDefinition = {
   },
 };
 
-const FOOTBALL: ThemeDefinition = {
-  id: 'football',
-  label: 'Footballeurs',
-  emoji: '⚽',
-  available: false,
-  palette: { primary: '#2e7d32', secondary: '#333', accent: '#fff', background: '#f4f6fb' },
-  cards: {},
-};
-
-export const THEMES: ThemeDefinition[] = [POKEMON, ONE_PIECE, DRAGON_BALL, MARIO, KPOP, FOOTBALL];
+export const THEMES: ThemeDefinition[] = [POKEMON, ONE_PIECE, DRAGON_BALL, MARIO, KPOP];
 
 export const themeById = (id: ThemeId): ThemeDefinition => THEMES.find((t) => t.id === id) ?? POKEMON;
