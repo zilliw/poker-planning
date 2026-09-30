@@ -1,5 +1,5 @@
 export const CARD_VALUES = ['0', '1', '2', '3', '5', '8', '13', '21', '?', '☕'] as const;
-export const THEMES = ['pokemon', 'onepiece', 'dragonball', 'mario', 'kpop', 'naruto'] as const;
+export const THEMES = ['pokemon', 'onepiece', 'dragonball', 'mario', 'kpop', 'naruto', 'space', 'animals', 'dinosaurs'] as const;
 export const MAX_PARTICIPANTS = 20;
 export const MAX_STORY_TITLE = 200;
 export const MAX_STORY_LINK = 500;
