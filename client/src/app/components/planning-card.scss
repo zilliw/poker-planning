@@ -158,6 +158,13 @@
       linear-gradient(160deg, var(--primary), var(--secondary));
   }
 
+  // Naruto: an orange chakra swirl.
+  &.back-naruto {
+    background:
+      radial-gradient(circle at center, var(--accent) 0 10%, transparent 11%),
+      repeating-radial-gradient(circle at center, var(--primary) 0 7px, var(--secondary) 7px 9px);
+  }
+
   // Mario: a red mushroom cap with white spots.
   &.back-mario {
     background:
