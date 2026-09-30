@@ -10,10 +10,17 @@ export interface Participant {
   vote: CardValue | null;
 }
 
+/** The user story being estimated, shared by the whole room. */
+export interface Story {
+  title: string;
+  link: string;
+}
+
 export interface RoomState {
   id: string;
   theme: ThemeId;
   revealed: boolean;
+  story: Story;
   participants: Participant[];
   myVote: CardValue | null;
 }
