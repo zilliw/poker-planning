@@ -161,6 +161,81 @@ const NARUTO: ThemeDefinition = {
   },
 };
 
-export const THEMES: ThemeDefinition[] = [POKEMON, ONE_PIECE, DRAGON_BALL, MARIO, KPOP, NARUTO];
+// Free themes below: Noto Emoji illustrations (Apache 2.0), see client/public/themes/CREDITS.md.
+
+const SPACE: ThemeDefinition = {
+  id: 'space',
+  label: "L'Espace",
+  emoji: '🚀',
+  available: true,
+  bundledImages: true,
+  palette: { primary: '#4f46e5', secondary: '#0f172a', accent: '#fbbf24', background: '#eef2ff' },
+  cards: {
+    '0': { name: 'Satellite', emoji: '🛰️' },
+    '1': { name: 'Fusée', emoji: '🚀' },
+    '2': { name: 'Comète', emoji: '☄️' },
+    '3': { name: 'Lune', emoji: '🌕' },
+    '5': { name: 'Terre', emoji: '🌍' },
+    '8': { name: 'Saturne', emoji: '🪐' },
+    '13': { name: 'Soleil', emoji: '☀️' },
+    '21': { name: 'Voie lactée', emoji: '🌌' },
+    '?': { name: 'OVNI', emoji: '🛸' },
+    '☕': { name: 'Astronaute', emoji: '🧑‍🚀' },
+  },
+};
+
+const ANIMALS: ThemeDefinition = {
+  id: 'animals',
+  label: 'Animaux',
+  emoji: '🐾',
+  available: true,
+  bundledImages: true,
+  palette: { primary: '#16a34a', secondary: '#14532d', accent: '#fde68a', background: '#f0fdf4' },
+  cards: {
+    '0': { name: 'Fourmi', emoji: '🐜' },
+    '1': { name: 'Souris', emoji: '🐭' },
+    '2': { name: 'Lapin', emoji: '🐇' },
+    '3': { name: 'Chat', emoji: '🐈' },
+    '5': { name: 'Chien', emoji: '🐕' },
+    '8': { name: 'Cheval', emoji: '🐎' },
+    '13': { name: 'Éléphant', emoji: '🐘' },
+    '21': { name: 'Baleine', emoji: '🐋' },
+    '?': { name: 'Licorne', emoji: '🦄' },
+    '☕': { name: 'Paresseux', emoji: '🦥' },
+  },
+};
+
+const DINOSAURS: ThemeDefinition = {
+  id: 'dinosaurs',
+  label: 'Dinosaures',
+  emoji: '🦖',
+  available: true,
+  bundledImages: true,
+  palette: { primary: '#c2410c', secondary: '#3f6212', accent: '#fde047', background: '#fffbeb' },
+  cards: {
+    '0': { name: 'Œuf', emoji: '🥚' },
+    '1': { name: 'Lézard', emoji: '🦎' },
+    '2': { name: 'Dodo', emoji: '🦤' },
+    '3': { name: 'Crocodile', emoji: '🐊' },
+    '5': { name: 'Mammouth', emoji: '🦣' },
+    '8': { name: 'Diplodocus', emoji: '🦕' },
+    '13': { name: 'T-Rex', emoji: '🦖' },
+    '21': { name: 'Météorite', emoji: '☄️' },
+    '?': { name: 'Fossile', emoji: '🦴' },
+    '☕': { name: 'Tortue', emoji: '🐢' },
+  },
+};
+
+export const THEMES: ThemeDefinition[] = [
+  POKEMON,
+  ONE_PIECE,
+  DRAGON_BALL,
+  MARIO,
+  KPOP,
+  NARUTO,
+  SPACE,
+  ANIMALS,
+  DINOSAURS,
+];
 
 export const themeById = (id: ThemeId): ThemeDefinition => THEMES.find((t) => t.id === id) ?? POKEMON;
