@@ -9,6 +9,7 @@ Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 
 | 🐉 Dragon Ball Z | ✅ disponible |
 | 🍄 Mario | ✅ disponible |
 | 🎤 KPop Demon Hunters | ✅ disponible |
+| 🍥 Naruto | ✅ disponible |
 
 ## Fonctionnalités
 

@@ -140,6 +140,27 @@ const KPOP: ThemeDefinition = {
   },
 };
 
-export const THEMES: ThemeDefinition[] = [POKEMON, ONE_PIECE, DRAGON_BALL, MARIO, KPOP];
+const NARUTO: ThemeDefinition = {
+  id: 'naruto',
+  label: 'Naruto',
+  emoji: '🍥',
+  available: true,
+  bundledImages: true,
+  palette: { primary: '#f97316', secondary: '#1f2937', accent: '#facc15', background: '#fff7ed' },
+  cards: {
+    '0': { name: 'Konohamaru', emoji: '🧣' },
+    '1': { name: 'Sakura', emoji: '🌸' },
+    '2': { name: 'Rock Lee', emoji: '👍' },
+    '3': { name: 'Gaara', emoji: '🏜️' },
+    '5': { name: 'Kakashi', emoji: '📕' },
+    '8': { name: 'Itachi', emoji: '🌙' },
+    '13': { name: 'Sasuke', emoji: '⚡' },
+    '21': { name: 'Naruto', emoji: '🍥' },
+    '?': { name: 'Tobi', emoji: '🌀' },
+    '☕': { name: 'Tonton', emoji: '🐷' },
+  },
+};
+
+export const THEMES: ThemeDefinition[] = [POKEMON, ONE_PIECE, DRAGON_BALL, MARIO, KPOP, NARUTO];
 
 export const themeById = (id: ThemeId): ThemeDefinition => THEMES.find((t) => t.id === id) ?? POKEMON;
