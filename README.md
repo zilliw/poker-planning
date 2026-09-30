@@ -17,7 +17,9 @@ Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 
 - **Révéler les votes** : affiche toutes les cartes à tous les participants, avec la répartition des votes et un indicateur de consensus.
 - À gauche, **Votre estimation** : la carte que vous avez choisie.
 - À droite, **Estimation la plus votée** (après révélation) : en cas d'égalité, la valeur la plus élevée l'emporte.
-- **Clean** : remet la table à zéro pour un nouveau tour.
+- **Titre et lien de l'US** : champs partagés par toute la room ; un lien `http(s)` s'ouvre avec le bouton « Ouvrir l'US ».
+- **Re-voter** (après révélation) : remet les votes à zéro et les cache à nouveau, en gardant la même US.
+- **Clean** : passe à l'US suivante (votes, titre et lien remis à zéro).
 - Changement de thème à la volée, synchronisé pour toute la room.
 - Un rechargement de page conserve le participant et son vote (reconnexion automatique).
 

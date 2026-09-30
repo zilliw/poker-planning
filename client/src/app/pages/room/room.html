@@ -49,6 +49,32 @@
       <button class="primary" type="submit" [disabled]="!name().trim()">Rejoindre</button>
     </form>
   } @else if (state(); as s) {
+    <section class="story">
+      <label class="story-field title">
+        <span>Titre de l'US</span>
+        <input
+          type="text"
+          maxlength="200"
+          placeholder="Ex. US-42 · Connexion avec Google"
+          [value]="s.story.title"
+          (change)="updateStory('title', $any($event.target).value)"
+        />
+      </label>
+      <label class="story-field link">
+        <span>Lien de l'US</span>
+        <input
+          type="text"
+          maxlength="500"
+          placeholder="https://…"
+          [value]="s.story.link"
+          (change)="updateStory('link', $any($event.target).value)"
+        />
+      </label>
+      @if (storyUrl(); as url) {
+        <a class="open-link" [href]="url" target="_blank" rel="noopener noreferrer">Ouvrir l'US ↗</a>
+      }
+    </section>
+
     <div class="board">
       <aside class="panel mine">
         <h2>Votre estimation</h2>
@@ -93,7 +119,23 @@
             >
               Révéler les votes
             </button>
-            <button type="button" class="secondary" (click)="planning.clear()">Clean</button>
+            <button
+              type="button"
+              class="revote"
+              [disabled]="!s.revealed"
+              title="Remet les votes à zéro en gardant la même US"
+              (click)="planning.revote()"
+            >
+              Re-voter
+            </button>
+            <button
+              type="button"
+              class="secondary"
+              title="Passe à l'US suivante : votes, titre et lien remis à zéro"
+              (click)="planning.clear()"
+            >
+              Clean
+            </button>
           </div>
 
           @if (stats(); as st) {
@@ -128,7 +170,7 @@
       <h3>
         {{
           s.revealed
-            ? 'Votes révélés — cliquez sur Clean pour un nouveau tour'
+            ? 'Votes révélés — Re-voter pour la même US, Clean pour la suivante'
             : 'Choisissez votre carte'
         }}
       </h3>

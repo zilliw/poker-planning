@@ -79,6 +79,19 @@ io.on('connection', (socket: Socket) => {
     void broadcast(room);
   });
 
+  socket.on('revote', () => {
+    if (!room) return;
+    store.revote(room);
+    void broadcast(room);
+  });
+
+  socket.on('setStory', (payload: unknown) => {
+    const p = (payload ?? {}) as Record<string, unknown>;
+    if (!room || typeof p.title !== 'string' || typeof p.link !== 'string') return;
+    store.setStory(room, { title: p.title, link: p.link });
+    void broadcast(room);
+  });
+
   socket.on('clear', () => {
     if (!room) return;
     store.clear(room);

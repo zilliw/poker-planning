@@ -1,6 +1,8 @@
 export const CARD_VALUES = ['0', '1', '2', '3', '5', '8', '13', '21', '?', '☕'] as const;
 export const THEMES = ['pokemon', 'onepiece', 'dragonball', 'mario', 'kpop'] as const;
 export const MAX_PARTICIPANTS = 20;
+export const MAX_STORY_TITLE = 200;
+export const MAX_STORY_LINK = 500;
 
 export type CardValue = (typeof CARD_VALUES)[number];
 export type Theme = (typeof THEMES)[number];
@@ -12,10 +14,17 @@ interface Participant {
   sockets: Set<string>;
 }
 
+/** The user story being estimated; free text shared by the whole room. */
+export interface Story {
+  title: string;
+  link: string;
+}
+
 export interface Room {
   id: string;
   theme: Theme;
   revealed: boolean;
+  story: Story;
   participants: Map<string, Participant>;
 }
 
@@ -31,6 +40,7 @@ export interface RoomView {
   id: string;
   theme: Theme;
   revealed: boolean;
+  story: Story;
   participants: ParticipantView[];
   myVote: CardValue | null;
 }
@@ -51,7 +61,13 @@ export class RoomStore {
   join(roomId: string, clientId: string, name: string, socketId: string, theme?: Theme): Room {
     let room = this.rooms.get(roomId);
     if (!room) {
-      room = { id: roomId, theme: theme ?? 'pokemon', revealed: false, participants: new Map() };
+      room = {
+        id: roomId,
+        theme: theme ?? 'pokemon',
+        revealed: false,
+        story: { title: '', link: '' },
+        participants: new Map(),
+      };
       this.rooms.set(roomId, room);
     }
     const existing = room.participants.get(clientId);
@@ -94,9 +110,23 @@ export class RoomStore {
     room.revealed = true;
   }
 
-  clear(room: Room): void {
+  /** New voting round on the same story: votes are reset and hidden again. */
+  revote(room: Room): void {
     room.revealed = false;
     for (const p of room.participants.values()) p.vote = null;
+  }
+
+  /** Moves on to the next story: votes and story are reset. */
+  clear(room: Room): void {
+    this.revote(room);
+    room.story = { title: '', link: '' };
+  }
+
+  setStory(room: Room, story: Story): void {
+    room.story = {
+      title: story.title.trim().slice(0, MAX_STORY_TITLE),
+      link: story.link.trim().slice(0, MAX_STORY_LINK),
+    };
   }
 
   setTheme(room: Room, theme: Theme): void {
@@ -109,6 +139,7 @@ export class RoomStore {
       id: room.id,
       theme: room.theme,
       revealed: room.revealed,
+      story: room.story,
       myVote: room.participants.get(clientId)?.vote ?? null,
       participants: [...room.participants.values()].map((p) => ({
         id: p.id,

@@ -71,6 +71,39 @@
   h2 { margin: 0; }
 }
 
+.story {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 20px 16px 0;
+  padding: 14px 16px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 8%);
+
+  .story-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+
+    span { font-size: 0.8rem; font-weight: 700; color: var(--secondary); }
+    &.title { flex: 2 1 260px; }
+    &.link { flex: 1 1 220px; }
+  }
+
+  .open-link {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--secondary) 12%, #fff);
+    color: var(--secondary);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+}
+
 .board {
   flex: 1;
   display: grid;
@@ -168,6 +201,12 @@
   text-align: center;
 
   .progress { margin: 0; font-weight: 600; }
+}
+
+.revote {
+  background: #fff;
+  color: var(--secondary);
+  border: 2px solid var(--secondary);
 }
 
 .actions {

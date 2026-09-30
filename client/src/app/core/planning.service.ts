@@ -1,6 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
-import { CardValue, RoomState, ThemeId } from './models';
+import { CardValue, RoomState, Story, ThemeId } from './models';
 
 const NAME_KEY = 'poker.name';
 const CLIENT_KEY = 'poker.clientId';
@@ -78,8 +78,19 @@ export class PlanningService {
     this.socket?.emit('reveal');
   }
 
+  /** Votes again on the same story. */
+  revote(): void {
+    this.socket?.emit('revote');
+  }
+
+  /** Next story: resets votes, title and link. */
   clear(): void {
     this.socket?.emit('clear');
+  }
+
+  setStory(story: Story): void {
+    this.state.update((s) => (s ? { ...s, story } : s));
+    this.socket?.emit('setStory', story);
   }
 
   setTheme(theme: ThemeId): void {

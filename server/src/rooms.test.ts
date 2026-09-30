@@ -41,3 +41,24 @@ test('reconnecting with the same clientId does not duplicate the participant', (
   store.removeIfGone(room, 'alice');
   assert.equal(store.get('r1'), undefined);
 });
+
+test('revote resets and hides votes but keeps the story', () => {
+  const store = new RoomStore();
+  const room = store.join('r1', 'alice', 'Alice', 's1');
+  store.setStory(room, { title: ' US-42 Login ', link: 'https://jira/US-42' });
+  store.vote(room, 'alice', '5');
+  store.reveal(room);
+  store.revote(room);
+  const view = store.view(room, 'alice');
+  assert.equal(view.revealed, false);
+  assert.equal(view.myVote, null);
+  assert.deepEqual(view.story, { title: 'US-42 Login', link: 'https://jira/US-42' });
+});
+
+test('clean also resets the story', () => {
+  const store = new RoomStore();
+  const room = store.join('r1', 'alice', 'Alice', 's1');
+  store.setStory(room, { title: 'US-42', link: 'https://jira/US-42' });
+  store.clear(room);
+  assert.deepEqual(store.view(room, 'alice').story, { title: '', link: '' });
+});

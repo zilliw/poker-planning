@@ -74,6 +74,18 @@ export class Room implements OnInit, OnDestroy {
     this.planning.vote(s.myVote === value ? null : value);
   }
 
+  /** Only http(s) links are rendered as clickable. */
+  protected readonly storyUrl = computed(() => {
+    const link = this.state()?.story.link ?? '';
+    return /^https?:\/\/\S+$/i.test(link) ? link : null;
+  });
+
+  protected updateStory(field: 'title' | 'link', value: string): void {
+    const story = this.state()?.story;
+    if (!story || story[field] === value.trim()) return;
+    this.planning.setStory({ ...story, [field]: value.trim() });
+  }
+
   protected changeTheme(theme: ThemeId): void {
     this.planning.setTheme(theme);
   }
