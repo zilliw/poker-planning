@@ -55,6 +55,36 @@ test('revote resets and hides votes but keeps the story', () => {
   assert.deepEqual(view.story, { title: 'US-42 Login', link: 'https://jira/US-42' });
 });
 
+test('after the reveal a new estimate is shown right away and flagged as revised', () => {
+  const store = new RoomStore();
+  const room = store.join('r1', 'alice', 'Alice', 's1');
+  store.join('r1', 'bob', 'Bob', 's2');
+  store.vote(room, 'alice', '5');
+  store.vote(room, 'bob', '8');
+  store.reveal(room);
+
+  store.vote(room, 'alice', '5'); // same card: not a revision
+  store.vote(room, 'bob', null); // cannot be withdrawn
+  store.vote(room, 'bob', '13');
+
+  const view = store.view(room, 'alice');
+  const alice = view.participants.find((p) => p.id === 'alice')!;
+  const bob = view.participants.find((p) => p.id === 'bob')!;
+  assert.deepEqual([alice.vote, alice.revised], ['5', false]);
+  assert.deepEqual([bob.vote, bob.revised], ['13', true]);
+  assert.equal(view.myVote, '5');
+
+  store.revote(room);
+  assert.equal(store.view(room, 'bob').participants.every((p) => !p.revised && p.vote === null), true);
+});
+
+test('a revised flag is never exposed before the reveal', () => {
+  const store = new RoomStore();
+  const room = store.join('r1', 'alice', 'Alice', 's1');
+  store.vote(room, 'alice', '3');
+  assert.equal(store.view(room, 'alice').participants[0].revised, false);
+});
+
 test('clean also resets the story', () => {
   const store = new RoomStore();
   const room = store.join('r1', 'alice', 'Alice', 's1');
