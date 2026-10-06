@@ -161,6 +161,48 @@ const NARUTO: ThemeDefinition = {
   },
 };
 
+const MARVEL: ThemeDefinition = {
+  id: 'marvel',
+  label: 'Marvel',
+  emoji: '🦸',
+  available: true,
+  bundledImages: true,
+  palette: { primary: '#dc2626', secondary: '#1e293b', accent: '#facc15', background: '#fef2f2' },
+  cards: {
+    '0': { name: 'Bébé Groot', emoji: '🌱' },
+    '1': { name: 'Ant-Man', emoji: '🐜' },
+    '2': { name: 'Spider-Man', emoji: '🕷️' },
+    '3': { name: 'Black Widow', emoji: '🕸️' },
+    '5': { name: 'Captain America', emoji: '🛡️' },
+    '8': { name: 'Iron Man', emoji: '🤖' },
+    '13': { name: 'Thor', emoji: '🔨' },
+    '21': { name: 'Thanos', emoji: '💎' },
+    '?': { name: 'Loki', emoji: '🐍' },
+    '☕': { name: 'Star-Lord', emoji: '🎧' },
+  },
+};
+
+const DC: ThemeDefinition = {
+  id: 'dc',
+  label: 'DC Comics',
+  emoji: '🦇',
+  available: true,
+  bundledImages: true,
+  palette: { primary: '#1d4ed8', secondary: '#111827', accent: '#facc15', background: '#eff6ff' },
+  cards: {
+    '0': { name: 'Robin', emoji: '🐦' },
+    '1': { name: 'Green Arrow', emoji: '🏹' },
+    '2': { name: 'Cyborg', emoji: '🦾' },
+    '3': { name: 'Aquaman', emoji: '🔱' },
+    '5': { name: 'Flash', emoji: '⚡' },
+    '8': { name: 'Batman', emoji: '🦇' },
+    '13': { name: 'Wonder Woman', emoji: '⭐' },
+    '21': { name: 'Superman', emoji: '🦸' },
+    '?': { name: 'Le Joker', emoji: '🃏' },
+    '☕': { name: 'Alfred', emoji: '🫖' },
+  },
+};
+
 // Free themes below: Noto Emoji illustrations (Apache 2.0), see client/public/themes/CREDITS.md.
 
 const SPACE: ThemeDefinition = {
@@ -233,6 +275,8 @@ export const THEMES: ThemeDefinition[] = [
   MARIO,
   KPOP,
   NARUTO,
+  MARVEL,
+  DC,
   SPACE,
   ANIMALS,
   DINOSAURS,

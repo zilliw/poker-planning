@@ -192,6 +192,20 @@
       linear-gradient(160deg, var(--primary), var(--secondary));
   }
 
+  // Marvel: a red comic-book burst.
+  &.back-marvel {
+    background:
+      radial-gradient(circle at center, var(--accent) 0 12%, transparent 13%),
+      repeating-conic-gradient(from 0deg at 50% 50%, var(--primary) 0 10deg, #b91c1c 10deg 20deg);
+  }
+
+  // DC Comics: a yellow bat-signal in a dark night sky.
+  &.back-dc {
+    background:
+      radial-gradient(ellipse 28% 16% at center, var(--accent) 0 92%, transparent 100%),
+      radial-gradient(circle at 50% 50%, #2563eb, var(--secondary));
+  }
+
   // Mario: a red mushroom cap with white spots.
   &.back-mario {
     background:
