@@ -268,6 +268,7 @@ const DINOSAURS: ThemeDefinition = {
   },
 };
 
+/** Shown in alphabetical order (home page and room theme picker). */
 export const THEMES: ThemeDefinition[] = [
   POKEMON,
   ONE_PIECE,
@@ -280,6 +281,6 @@ export const THEMES: ThemeDefinition[] = [
   SPACE,
   ANIMALS,
   DINOSAURS,
-];
+].sort((a, b) => a.label.localeCompare(b.label, 'fr', { sensitivity: 'base' }));
 
 export const themeById = (id: ThemeId): ThemeDefinition => THEMES.find((t) => t.id === id) ?? POKEMON;
