@@ -10,6 +10,8 @@ Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 
 | 🍄 Mario | ✅ disponible |
 | 🎤 KPop Demon Hunters | ✅ disponible |
 | 🍥 Naruto | ✅ disponible |
+| 🦸 Marvel | ✅ disponible |
+| 🦇 DC Comics | ✅ disponible |
 | 🚀 L'Espace | ✅ disponible (illustrations libres) |
 | 🐾 Animaux | ✅ disponible (illustrations libres) |
 | 🦖 Dinosaures | ✅ disponible (illustrations libres) |

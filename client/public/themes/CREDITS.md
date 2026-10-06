@@ -13,5 +13,5 @@ https://www.apache.org/licenses/LICENSE-2.0
 ## Autres thèmes
 
 Les images des thèmes Pokémon, One Piece, Dragon Ball Z, Mario,
-KPop Demon Hunters et Naruto appartiennent à leurs ayants droit respectifs
+KPop Demon Hunters, Naruto, Marvel et DC Comics appartiennent à leurs ayants droit respectifs
 et ne sont pas couvertes par une licence libre.
