@@ -11,6 +11,8 @@ interface Participant {
   id: string;
   name: string;
   vote: CardValue | null;
+  /** True when the estimate was given or changed after the votes were revealed. */
+  revised: boolean;
   sockets: Set<string>;
 }
 
@@ -34,6 +36,8 @@ export interface ParticipantView {
   hasVoted: boolean;
   /** Only filled once the votes are revealed. */
   vote: CardValue | null;
+  /** Estimate given or changed after the reveal (only once revealed). */
+  revised: boolean;
 }
 
 export interface RoomView {
@@ -78,7 +82,7 @@ export class RoomStore {
       if (room.participants.size >= MAX_PARTICIPANTS) {
         throw new Error(`La room est pleine (${MAX_PARTICIPANTS} participants max).`);
       }
-      room.participants.set(clientId, { id: clientId, name, vote: null, sockets: new Set([socketId]) });
+      room.participants.set(clientId, { id: clientId, name, vote: null, revised: false, sockets: new Set([socketId]) });
     }
     return room;
   }
@@ -101,8 +105,14 @@ export class RoomStore {
   vote(room: Room, clientId: string, value: CardValue | null): void {
     const p = room.participants.get(clientId);
     if (!p) return;
-    // Votes are frozen once revealed, until the table is cleaned.
-    if (room.revealed) return;
+    if (room.revealed) {
+      // After the reveal a new estimate is shown right away, flagged as revised.
+      // A vote can be changed but not withdrawn, and re-picking the same card changes nothing.
+      if (value === null || value === p.vote) return;
+      p.vote = value;
+      p.revised = true;
+      return;
+    }
     p.vote = value;
   }
 
@@ -113,7 +123,10 @@ export class RoomStore {
   /** New voting round on the same story: votes are reset and hidden again. */
   revote(room: Room): void {
     room.revealed = false;
-    for (const p of room.participants.values()) p.vote = null;
+    for (const p of room.participants.values()) {
+      p.vote = null;
+      p.revised = false;
+    }
   }
 
   /** Moves on to the next story: votes and story are reset. */
@@ -146,6 +159,7 @@ export class RoomStore {
         name: p.name,
         hasVoted: p.vote !== null,
         vote: room.revealed ? p.vote : null,
+        revised: room.revealed && p.revised,
       })),
     };
   }

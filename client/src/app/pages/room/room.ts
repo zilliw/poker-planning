@@ -70,7 +70,12 @@ export class Room implements OnInit, OnDestroy {
 
   protected pick(value: CardValue): void {
     const s = this.state();
-    if (!s || s.revealed) return;
+    if (!s) return;
+    // After the reveal, picking another card gives a new (revised) estimate; the same card does nothing.
+    if (s.revealed) {
+      if (s.myVote !== value) this.planning.vote(value);
+      return;
+    }
     this.planning.vote(s.myVote === value ? null : value);
   }
 

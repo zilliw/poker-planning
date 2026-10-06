@@ -64,6 +64,21 @@
     font-weight: 800;
   }
 
+  // Estimate given or changed after the reveal: green and bold.
+  &.revised {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgb(22 163 74 / 35%), 0 4px 10px rgb(0 0 0 / 15%);
+
+    .corner, .big { color: #16a34a; font-weight: 900; }
+
+    .badge,
+    &.full .badge {
+      background: #16a34a;
+      font-weight: 900;
+      box-shadow: 0 0 0 2px rgb(22 163 74 / 45%), 0 2px 6px rgb(0 0 0 / 45%);
+    }
+  }
+
   // Full-bleed art (images): fills the card, value and name stay readable on top.
   &.full {
     overflow: hidden;

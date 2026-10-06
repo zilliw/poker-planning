@@ -18,13 +18,13 @@ import { ThemeDefinition, cardImage } from '../core/themes';
       @if (art(); as a) {
         @if (image(); as src) {
           <!-- Full-bleed art: the value badge and name banner sit on top of the image. -->
-          <div class="card front full" [class.small]="small()" [class.selected]="selected()">
+          <div class="card front full" [class.small]="small()" [class.selected]="selected()" [class.revised]="revised()">
             <img class="art" [src]="src" [alt]="a.name" loading="lazy" (error)="brokenImage.set(src)" />
             <span class="badge">{{ value() }}</span>
             <span class="banner">{{ a.name }}</span>
           </div>
         } @else {
-          <div class="card front" [class.small]="small()" [class.selected]="selected()">
+          <div class="card front" [class.small]="small()" [class.selected]="selected()" [class.revised]="revised()">
             <span class="corner top">{{ value() }}</span>
             <span class="illustration" aria-hidden="true">{{ a.emoji }}</span>
             <span class="name">{{ a.name }}</span>
@@ -32,7 +32,7 @@ import { ThemeDefinition, cardImage } from '../core/themes';
           </div>
         }
       } @else {
-        <div class="card front" [class.small]="small()" [class.selected]="selected()">
+        <div class="card front" [class.small]="small()" [class.selected]="selected()" [class.revised]="revised()">
           <span class="big">{{ value() }}</span>
         </div>
       }
@@ -46,6 +46,8 @@ export class PlanningCard {
   readonly faceDown = input(false);
   readonly checked = input(false);
   readonly selected = input(false);
+  /** Estimate given or changed after the reveal: shown in green and bold. */
+  readonly revised = input(false);
   readonly small = input(false);
 
   /** Falls back to the emoji illustration when an image fails to load. */

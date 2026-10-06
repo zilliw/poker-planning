@@ -8,6 +8,8 @@ export interface Participant {
   name: string;
   hasVoted: boolean;
   vote: CardValue | null;
+  /** Estimate given or changed after the reveal. */
+  revised: boolean;
 }
 
 /** The user story being estimated, shared by the whole room. */

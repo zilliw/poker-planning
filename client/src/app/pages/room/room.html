@@ -90,7 +90,12 @@
           @for (p of s.participants; track p.id) {
             <div class="seat" [class.me]="p.id === planning.clientId">
               @if (s.revealed && p.vote) {
-                <app-planning-card [value]="p.vote" [theme]="theme()" [small]="true" />
+                <app-planning-card
+                  [value]="p.vote"
+                  [theme]="theme()"
+                  [small]="true"
+                  [revised]="p.revised"
+                />
               } @else if (p.hasVoted) {
                 <app-planning-card
                   [faceDown]="true"
@@ -166,11 +171,11 @@
       </aside>
     </div>
 
-    <section class="hand" [class.locked]="s.revealed">
+    <section class="hand">
       <h3>
         {{
           s.revealed
-            ? 'Votes révélés — Re-voter pour la même US, Clean pour la suivante'
+            ? 'Votes révélés — changez de carte pour donner une nouvelle estimation, Re-voter pour un nouveau tour, Clean pour l\'US suivante'
             : 'Choisissez votre carte'
         }}
       </h3>
@@ -179,7 +184,6 @@
           <button
             type="button"
             class="card-btn"
-            [disabled]="s.revealed"
             [attr.aria-pressed]="s.myVote === c"
             (click)="pick(c)"
           >

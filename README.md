@@ -24,6 +24,7 @@ Poker planning en temps réel basé sur la **suite de Fibonacci** (`0 1 2 3 5 8 
 - À gauche, **Votre estimation** : la carte que vous avez choisie.
 - À droite, **Estimation la plus votée** (après révélation) : en cas d'égalité, la valeur la plus élevée l'emporte.
 - **Titre et lien de l'US** : champs partagés par toute la room ; un lien `http(s)` s'ouvre avec le bouton « Ouvrir l'US ».
+- **Nouvelle estimation après la révélation** : sans rien effacer, chacun peut choisir une autre carte. Le nouveau chiffre est révélé tout de suite, en **vert et en gras**, et « l'estimation la plus votée » est recalculée.
 - **Re-voter** (après révélation) : remet les votes à zéro et les cache à nouveau, en gardant la même US.
 - **Clean** : passe à l'US suivante (votes, titre et lien remis à zéro).
 - Changement de thème à la volée, synchronisé pour toute la room.

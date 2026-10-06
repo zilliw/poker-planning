@@ -69,8 +69,8 @@ export class PlanningService {
   }
 
   vote(value: CardValue | null): void {
-    // Optimistic update so the selected card reacts instantly.
-    this.state.update((s) => (s && !s.revealed ? { ...s, myVote: value } : s));
+    // Optimistic update so the selected card reacts instantly (after the reveal, a vote cannot be withdrawn).
+    this.state.update((s) => (s && (!s.revealed || value !== null) ? { ...s, myVote: value } : s));
     this.socket?.emit('vote', value);
   }
 
